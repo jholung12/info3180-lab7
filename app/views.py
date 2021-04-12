@@ -25,7 +25,6 @@ def upload():
     print()
     if request.method == "POST" and form.validate_on_submit():
         description = form.description.data
-        print(description)
 
         upload = request.files['photo']
         filename = secure_filename(upload.filename)
