@@ -22,17 +22,19 @@ from werkzeug.utils import secure_filename
 @app.route('/api/upload', methods=['POST'])
 def upload():
     form = forms.UploadForm()
-    if request.method == "POST" and form.validate_on_submit():
+    print(form.validate_on_submit())
+    if request.method == "POST":
         description = form.description.data
+        print(description)
 
         upload = request.files['photo']
         filename = secure_filename(upload.filename)
         upload.save(os.path.join(
             app.config['UPLOAD_FOLDER'], filename
         ))
-        
         return jsonify(message="File Upload Successful", filename=filename, description=description)
     else:
+        print('hello')
         return form_errors(form)
 
 
